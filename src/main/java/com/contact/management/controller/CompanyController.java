@@ -1,7 +1,7 @@
 package com.contact.management.controller;
 
 import com.contact.management.model.Company;
-import com.contact.management.model.CompanyDto;
+import com.contact.management.dto.CompanyDto;
 import com.contact.management.service.CompanyService;
 import jakarta.validation.Valid;
 import org.modelmapper.ModelMapper;
@@ -50,12 +50,6 @@ public class CompanyController {
     public ResponseEntity<String> updateCompany(@PathVariable Long id, @RequestBody CompanyDto updatedCompany) {
         companyService.updateCompany(id, updatedCompany);
         return new ResponseEntity<>("Contact updated successfully", HttpStatus.OK);
-    }
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteCompany(@PathVariable Long id) {
-        companyService.deleteCompany(id);
-        return new ResponseEntity<>("Company deleted", HttpStatus.OK);
     }
 
     @GetMapping("/tvaNumber/{tvaNumber}")

@@ -25,21 +25,20 @@ public class ContactServiceImplTest {
     @InjectMocks
     private ContactServiceImpl contactServiceImpl;
 
-    // Write tests for ContactServiceImpl methods
     @Test
     public void testGetContactById() {
         // Mock data
-//        Contact mockContact = new Contact();
-//        mockContact.setId(1L);
-//
-//        // Mock behavior
-//        Mockito.when(contactRepository.findById(1L)).thenReturn(Optional.of(mockContact));
-//
-//        // Test
-//        Contact result = contactServiceImpl.getContactById(1L);
-//
-//        // Verify
-//        Assertions.assertNotNull(result);
-//        Assertions.assertEquals(1L, result.getId().longValue());
+        Contact mockContact = new Contact();
+        mockContact.setId(1L);
+
+        // Mock behavior
+        Mockito.when(contactRepository.findById(1L)).thenReturn(Optional.of(mockContact));
+
+        // Test
+        Contact result = contactServiceImpl.getContactById(1L);
+
+        // Verify
+        Assertions.assertNotNull(result);
+        Assertions.assertEquals(1L, result.getId().longValue());
     }
 }

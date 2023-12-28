@@ -2,12 +2,13 @@ package com.contact.management.service.impl;
 
 import com.contact.management.model.Company;
 import com.contact.management.model.Contact;
-import com.contact.management.model.ContactDto;
+import com.contact.management.dto.ContactDto;
 import com.contact.management.repository.ContactRepository;
 import com.contact.management.service.CompanyService;
 import com.contact.management.service.ContactService;
 import com.contact.management.service.exception.ContactNotFoundException;
 import com.contact.management.service.exception.ContactValidationException;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BeanPropertyBindingResult;
@@ -16,8 +17,10 @@ import org.springframework.validation.Validator;
 
 import java.util.HashSet;
 import java.util.List;
+import java.util.Optional;
 
 @Service
+@Transactional
 public class ContactServiceImpl implements ContactService {
     private final ContactRepository contactRepository;
     private final CompanyService companyService;
@@ -31,9 +34,14 @@ public class ContactServiceImpl implements ContactService {
         this.modelMapper = modelMapper;
         this.validator = validator;
     }
+
     public Contact getContactById(Long contactId) {
-        return contactRepository.findById(contactId)
+        return getContact(contactId)
                 .orElseThrow(() -> new ContactNotFoundException("Contact not found with id: " + contactId));
+    }
+
+    private Optional<Contact> getContact(Long contactId) {
+        return contactRepository.findById(contactId);
     }
 
     @Override
@@ -51,15 +59,16 @@ public class ContactServiceImpl implements ContactService {
     @Override
     public void updateContact(Long id, ContactDto updatedContactDto) {
         Contact existingContact = getContactById(id);
-        validateContact(existingContact);
         modelMapper.map(updatedContactDto, existingContact);
+        validateContact(existingContact);
         contactRepository.save(existingContact);
     }
 
     @Override
     public void deleteContact(Long id) {
-        contactRepository.deleteById(id);
+        contactRepository.deleteById(getContactById(id).getId());
     }
+
     public void addContactToCompanies(Long contactId, List<Long> companyIds) {
         Contact existingContact = getContactById(contactId);
         List<Company> companies = companyIds.stream()

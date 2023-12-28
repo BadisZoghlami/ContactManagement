@@ -1,10 +1,9 @@
 package com.contact.management.service;
 
 import com.contact.management.model.Company;
-import com.contact.management.model.CompanyDto;
+import com.contact.management.dto.CompanyDto;
 
 import java.util.List;
-import java.util.Optional;
 
 public interface CompanyService {
     Company getCompanyById(Long companyId);
@@ -14,8 +13,6 @@ public interface CompanyService {
     void createCompany(CompanyDto company);
 
     void updateCompany(Long id, CompanyDto company);
-
-    void deleteCompany(Long id);
 
     Company findCompanyByTvaNumber(String tvaNumber);
 }

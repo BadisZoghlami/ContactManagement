@@ -1,9 +1,7 @@
 package com.contact.management;
 
-import com.contact.management.model.Company;
-import com.contact.management.model.CompanyDto;
-import com.contact.management.model.Contact;
-import com.contact.management.model.ContactDto;
+import com.contact.management.dto.CompanyDto;
+import com.contact.management.dto.ContactDto;
 import com.contact.management.service.CompanyService;
 import com.contact.management.service.ContactService;
 import org.springframework.boot.CommandLineRunner;
@@ -23,18 +21,16 @@ public class ContactManagementApplication {
     public CommandLineRunner initData(ContactService contactService, CompanyService companyService) {
         return args -> {
             // Create example companies
-            CompanyDto company1 = new CompanyDto(1L, "Company 1","123 Main Street","123456789");
-
-            CompanyDto company2 = new CompanyDto(2L, "Company 2","456 Main Street","987654321");
+            CompanyDto company1 = new CompanyDto("Company 1","123 Main Street","123456789");
+            CompanyDto company2 = new CompanyDto("Company 2","456 Main Street","987654321");
 
             // Save companies
             companyService.createCompany(company1);
             companyService.createCompany(company2);
 
             // Create example contacts
-            ContactDto contact1 = new ContactDto("John", "Doe", "789 Elm Lane", false, null);
-
-            ContactDto contact2 = new ContactDto("Jane", "Smith", "101 Pine Road", true, "1111");
+            ContactDto contact1 = new ContactDto("John", "Doe", "789 Elm Lane", false, null, null);
+            ContactDto contact2 = new ContactDto("Jane", "Smith", "101 Pine Road", true, "1111", null);
 
             // Save contacts
             contactService.createContact(contact1);

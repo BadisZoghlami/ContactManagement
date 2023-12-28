@@ -1,15 +1,17 @@
 package com.contact.management.service.impl;
 
 import com.contact.management.model.Company;
-import com.contact.management.model.CompanyDto;
+import com.contact.management.dto.CompanyDto;
 import com.contact.management.repository.CompanyRepository;
 import com.contact.management.service.exception.CompanyNotFoundException;
+import jakarta.transaction.Transactional;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
+@Transactional
 public class CompanyServiceImpl implements com.contact.management.service.CompanyService {
     private final CompanyRepository companyRepository;
     private final ModelMapper modelMapper;
@@ -41,11 +43,6 @@ public class CompanyServiceImpl implements com.contact.management.service.Compan
         Company existingCompany = getCompanyById(id);
         modelMapper.map(updatedCompanyDto, existingCompany);
         companyRepository.save(existingCompany);
-    }
-
-    @Override
-    public void deleteCompany(Long id) {
-        companyRepository.deleteById(id);
     }
 
     @Override

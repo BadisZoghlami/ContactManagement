@@ -1,14 +1,15 @@
-package com.contact.management.model;
+package com.contact.management.dto;
 
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class CompanyDto {
-    private Long id;
     private String name;
     private String address;
     private String tvaNumber;

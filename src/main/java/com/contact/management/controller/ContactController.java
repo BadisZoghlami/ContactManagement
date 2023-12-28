@@ -1,7 +1,7 @@
 package com.contact.management.controller;
 
 import com.contact.management.model.Contact;
-import com.contact.management.model.ContactDto;
+import com.contact.management.dto.ContactDto;
 import com.contact.management.model.ContactToCompaniesRequest;
 import com.contact.management.service.ContactService;
 import jakarta.validation.Valid;
@@ -49,7 +49,7 @@ public class ContactController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> updateContact(@PathVariable Long id, @RequestBody ContactDto updatedContact) {
+    public ResponseEntity<String> updateContact(@PathVariable Long id, @Valid @RequestBody ContactDto updatedContact) {
         contactService.updateContact(id, updatedContact);
         return new ResponseEntity<>("Contact updated successfully", HttpStatus.OK);
     }

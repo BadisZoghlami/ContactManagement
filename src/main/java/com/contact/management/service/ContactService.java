@@ -1,7 +1,7 @@
 package com.contact.management.service;
 
 import com.contact.management.model.Contact;
-import com.contact.management.model.ContactDto;
+import com.contact.management.dto.ContactDto;
 
 import java.util.List;
 

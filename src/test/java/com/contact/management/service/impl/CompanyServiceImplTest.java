@@ -21,8 +21,6 @@ class CompanyServiceImplTest {
 
     @InjectMocks
     private CompanyServiceImpl companyServiceImpl;
-
-    // Write tests for CompanyServiceImpl methods
     @Test
     void testGetCompanyById() {
         // Mock data

@@ -1,11 +1,17 @@
-package com.contact.management.model;
+package com.contact.management.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
-import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
-@Data
+import java.util.HashSet;
+import java.util.Set;
+
+@Getter
+@Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public class ContactDto {
@@ -17,4 +23,7 @@ public class ContactDto {
     private String address;
     private boolean isFreelance;
     private String tvaNumber;
+
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
+    private Set<CompanyDto> companies = new HashSet<>();
 }
